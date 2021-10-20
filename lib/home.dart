@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp_ui/calls.dart';
+import 'package:whatsapp_ui/camera.dart';
 import 'package:whatsapp_ui/chats.dart';
 import 'package:whatsapp_ui/status.dart';
 
@@ -29,14 +30,47 @@ class _HomeState extends State<Home> {
                   Icons.search,
                 ),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.more_vert,
-                ),
-              ),
+              PopupMenuButton(
+                  onSelected: (value) {
+                    print(value);
+                  },
+                 
+                  itemBuilder: (BuildContext context) {
+                    return [
+                      PopupMenuItem(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right:8.0),
+                          child: Text("New Group"),
+                        ),
+                        value: "New Group",
+                      ),
+                      PopupMenuItem(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right:8.0),
+                          child: Text("New Broadcast"),
+                        ),
+                        value: "New Broadcast",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Linked Devices"),
+                        value: "Linked Devices",
+                      ),
+                      PopupMenuItem(
+                        child: Padding(
+                          padding: const EdgeInsets.only(right:7.0),
+                          child: Text("Starred Messages"),
+                        ),
+                        value: "Starred Messages",
+                      ),
+                      PopupMenuItem(
+                        child: Text("Settings"),
+                        value: "Settings",
+                      ),
+                    ];
+                  })
             ],
             bottom: TabBar(
+              indicatorWeight: 3,
               indicatorColor: Colors.white,
               tabs: [
                 IconButton(
@@ -46,12 +80,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
                 Tab(
-                  child: Row(
-                    children: [
-                      Text("CHATS", style: TextStyle(fontSize: 14)),
-                     
-                    ],
-                  ),
+                  child: Text("CHATS", style: TextStyle(fontSize: 14)),
                 ),
                 Tab(
                   child: Text("STATUS", style: TextStyle(fontSize: 14)),
@@ -63,7 +92,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           body: TabBarView(children: [
-            Status(),
+            Camera(),
             Chats(),
             Status(),
             Calls(),
